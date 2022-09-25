@@ -69,8 +69,9 @@ class SmtpPushoverHandler:
         # Extract the body of the message
         body = get_email_body(message)
         # Send just the body
-        send_pushover_message(body)
-        logger.info(f'Sent message from "{envelope.mail_from}" content: {json.dumps(body)}')
+        send_pushover_message(f'{message["subject"]}.\n{body}')
+        logger.info(
+            f'Sent message from "{envelope.mail_from}". Subject {message["subject"]} content: {json.dumps(body)}')
         return '250 Message accepted for delivery'
 
 
